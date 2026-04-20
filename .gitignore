@@ -1,6 +1,10 @@
 .DS_Store
+._*
+.AppleDouble/
+.LSOverride
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
+*.tar.gz
 .repo-archive/

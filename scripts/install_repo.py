@@ -7,6 +7,15 @@ import sys
 from pathlib import Path
 
 PLUGIN_NAME = "yandex-direct-agent"
+IGNORE_PATTERNS = (
+    ".git",
+    "__pycache__",
+    ".DS_Store",
+    "._*",
+    ".AppleDouble",
+    ".repo-archive",
+    "*.tar.gz",
+)
 ENTRY = {
     "name": PLUGIN_NAME,
     "source": {
@@ -27,6 +36,23 @@ def _is_subpath(path: Path, parent: Path) -> bool:
         return True
     except ValueError:
         return False
+
+
+def _validate_copy_paths(source_root: Path, target_root: Path) -> None:
+    if source_root == target_root:
+        raise ValueError(
+            "Refusing unsafe copy: source and target plugin directories are identical."
+        )
+
+    if _is_subpath(source_root, target_root):
+        raise ValueError(
+            "Refusing unsafe copy: source directory is inside target plugin directory."
+        )
+
+    if _is_subpath(target_root, source_root):
+        raise ValueError(
+            "Refusing unsafe copy: target plugin directory is inside source directory."
+        )
 
 
 def _load_marketplace(path: Path) -> dict:
@@ -61,13 +87,14 @@ def _upsert_plugin(data: dict, entry: dict) -> None:
 
 
 def _copy_plugin(source_root: Path, target_root: Path) -> None:
+    _validate_copy_paths(source_root, target_root)
     if target_root.exists():
         shutil.rmtree(target_root)
     target_root.parent.mkdir(parents=True, exist_ok=True)
     shutil.copytree(
         source_root,
         target_root,
-        ignore=shutil.ignore_patterns(".git", "__pycache__", ".DS_Store"),
+        ignore=shutil.ignore_patterns(*IGNORE_PATTERNS),
     )
 
 
@@ -76,14 +103,6 @@ def main() -> int:
     repo_root = Path.cwd().resolve()
     target_plugin_dir = repo_root / "plugins" / PLUGIN_NAME
     marketplace_path = repo_root / ".agents" / "plugins" / "marketplace.json"
-
-    if _is_subpath(target_plugin_dir, source_root):
-        print(
-            "[ERROR] Refusing to copy plugin into itself. "
-            "Run this script from the target repository root.",
-            file=sys.stderr,
-        )
-        return 1
 
     try:
         _copy_plugin(source_root, target_plugin_dir)
@@ -104,7 +123,7 @@ def main() -> int:
     print("Next steps:")
     print("1) Restart Codex")
     print("2) Install 'Yandex.Direct Agent' from marketplace")
-    print("3) Complete MCP login flow for production access")
+    print("3) Complete MCP login flow if production MCP uses OAuth")
     return 0
 
 

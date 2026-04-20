@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "description": "Codex plugin for Yandex Direct account audits with MCP-powered read access.",
   "author": {
-    "name": "[Your Team Name]",
-    "email": "team@example.com",
-    "url": "https://github.com/tonyloks"
+    "name": "Антон Перепечаев",
+    "url": "https://t.me/poschitai"
   },
   "repository": "https://github.com/tonyloks/yandex-direct-agent-plugin",
-  "homepage": "https://github.com/tonyloks/yandex-direct-agent-plugin#installation",
+  "homepage": "https://direct-alert.ru",
   "license": "MIT",
   "keywords": [
     "yandex-direct",
@@ -23,14 +22,12 @@
     "displayName": "Yandex.Direct Agent",
     "shortDescription": "Audit Yandex Direct accounts and check landing-page issues via MCP.",
     "longDescription": "Yandex.Direct Agent helps run fast account audits in Codex using MCP data. It includes lightweight skills for campaign quality checks and landing-page 404 validation. After installation, connect through the MCP login flow to access your production data.",
-    "developerName": "[Your Company Name]",
+    "developerName": "Антон Перепечаев",
     "category": "Productivity",
     "capabilities": [
       "Read"
     ],
-    "websiteURL": "https://example.com/yandex-direct-agent",
-    "privacyPolicyURL": "https://example.com/privacy",
-    "termsOfServiceURL": "https://example.com/terms",
+    "websiteURL": "https://direct-alert.ru",
     "defaultPrompt": [
       "Run a full Yandex Direct account audit and highlight top risks.",
       "Check landing pages from my active campaigns and flag 404 issues.",

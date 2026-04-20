@@ -23,13 +23,19 @@ This copies the plugin into `./plugins/yandex-direct-agent` and upserts `./.agen
 
 ## 3) Restart and connect
 
-1. Restart Codex.
-2. Install **Yandex.Direct Agent** from the plugin marketplace.
-3. Complete MCP login flow for production access.
+Restart Codex, open `/plugins`, install **Yandex.Direct Agent**, then open `/mcp` and verify that `yandex-direct-agent` is visible.
 
 ## 4) Smoke-check
 
-In Codex, run a simple prompt such as:
+```bash
+python3 scripts/verify_plugin.py
+codex mcp list
+codex mcp login yandex-direct-agent
+```
+
+Use `codex mcp login yandex-direct-agent` only when production MCP uses an OAuth login flow.
+
+After that, run a simple prompt in Codex such as:
 
 - `Run a quick Yandex Direct account audit and list top 3 issues.`
 - `Check these landing pages for 404/soft-404 behavior.`

@@ -2,13 +2,20 @@
 
 A minimal Codex plugin for Yandex Direct audits with production MCP access.
 
+## Author
+
+Created by Антон Перепечаев.
+
+- Telegram: https://t.me/poschitai
+- Website: https://direct-alert.ru
+
 ## What is included
 
 - `skills/yandex-direct-account-audit` (v1 skeleton)
 - `skills/website-404-check` (v1 skeleton)
 - `.mcp.json` with production server: `https://direct-alert.ru/mcp`
 
-Production MCP requires login after plugin installation.
+Production MCP may require login after plugin installation if the server uses OAuth.
 
 ## Install (personal)
 
@@ -46,7 +53,11 @@ Re-run the same install command you used before (personal or repo-scoped). The s
 
 ```bash
 python3 scripts/verify_plugin.py
+codex mcp list
+codex mcp login yandex-direct-agent
 ```
+
+Use `codex mcp login yandex-direct-agent` only when the production MCP endpoint supports an OAuth login flow.
 
 ## Development notes
 

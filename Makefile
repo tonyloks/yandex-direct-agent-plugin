@@ -29,11 +29,23 @@ archive-repo:
 	git diff --staged > "$$out_dir/diff_staged.patch" || true; \
 	git diff HEAD > "$$out_dir/diff_vs_head.patch" || true; \
 	git bundle create "$$out_dir/repo.bundle" --all > /dev/null 2> "$$out_dir/repo_bundle.stderr" || true; \
-	tar -czf "$$out_dir/worktree.tar.gz" \
-		--exclude='./.git' \
-		--exclude='./$(ARCHIVE_DIR)' \
-		. ; \
-	tar -czf "$$out_dir.tar.gz" -C "$(ARCHIVE_DIR)" "snapshot-$$ts"; \
+		COPYFILE_DISABLE=1 tar -czf "$$out_dir/worktree.tar.gz" \
+			--exclude='./.git' \
+			--exclude='./$(ARCHIVE_DIR)' \
+			--exclude='./.repo-archive' \
+			--exclude='./._*' \
+			--exclude='./.DS_Store' \
+			--exclude='./.AppleDouble' \
+			--exclude='._*' \
+			--exclude='.DS_Store' \
+			--exclude='.AppleDouble' \
+			. ; \
+		COPYFILE_DISABLE=1 tar -czf "$$out_dir.tar.gz" \
+			--exclude='._*' \
+			--exclude='.DS_Store' \
+			--exclude='.AppleDouble' \
+			--exclude='.repo-archive' \
+			-C "$(ARCHIVE_DIR)" "snapshot-$$ts"; \
 	echo "Done."; \
 	echo "Folder snapshot: $$out_dir"; \
 	echo "Portable archive: $$out_dir.tar.gz"
