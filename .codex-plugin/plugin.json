@@ -5,10 +5,10 @@
   "author": {
     "name": "[Your Team Name]",
     "email": "team@example.com",
-    "url": "https://github.com/<org-or-user>"
+    "url": "https://github.com/tonyloks"
   },
-  "repository": "https://github.com/<org-or-user>/yandex-direct-agent-plugin",
-  "homepage": "https://github.com/<org-or-user>/yandex-direct-agent-plugin#installation",
+  "repository": "https://github.com/tonyloks/yandex-direct-agent-plugin",
+  "homepage": "https://github.com/tonyloks/yandex-direct-agent-plugin#installation",
   "license": "MIT",
   "keywords": [
     "yandex-direct",
