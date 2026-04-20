@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "yandex-direct-agent": {
+      "url": "https://direct-alert.ru/mcp"
+    }
+  }
+}
